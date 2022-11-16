@@ -32,17 +32,18 @@ def generate_legal_code_db():
 
 
 def has_current_spreadsheet():
-    con = sqlite3.connect(db_location, timeout=30)
-    cur = con.cursor()
-    try:
-        fname = cur.execute("SELECT * FROM meta").fetchone()[0]
-        date_string = re.search(r"legal_code_descriptions_(\d+)\.xlsx", fname).group(1)
-        date = datetime.datetime.strptime(date_string, "%Y%m%d").date()
-        age = datetime.datetime.now().date() - date
-        logger.debug(f"Legal Code Database is {age} days old")
-        return age.days <= 30
-    except (sqlite3.OperationalError, TypeError):
-        return False
+    return True
+#    con = sqlite3.connect(db_location, timeout=30)
+#    cur = con.cursor()
+#    try:
+#        fname = cur.execute("SELECT * FROM meta").fetchone()[0]
+#        date_string = re.search(r"legal_code_descriptions_(\d+)\.xlsx", fname).group(1)
+#        date = datetime.datetime.strptime(date_string, "%Y%m%d").date()
+#        age = datetime.datetime.now().date() - date
+#        logger.debug(f"Legal Code Database is {age} days old")
+#        return age.days <= 30
+#    except (sqlite3.OperationalError, TypeError):
+#        return False
 
 
 def get_spreadsheet():
