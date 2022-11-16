@@ -46,19 +46,23 @@ def has_current_spreadsheet():
 
 
 def get_spreadsheet():
-    url = "https://www.epo.org/searching-for-patents/data/coverage/weekly.html"
-    response = session.get(url)
-    response.raise_for_status()
-    tree = ET.HTML(response.text)
-    excel_url = tree.xpath('.//a[contains(@href, "legal_code_descriptions")]/@href')[0]
-    out_path = dir / excel_url.split("/")[-1]
-    if out_path.exists():
-        return out_path
-    response = session.get(excel_url, stream=True)
-    with out_path.open("wb") as f:
-        for chunk in response.iter_content(chunk_size=8192):
-            f.write(chunk)
-    return out_path
+    return dir / "legal_code_descriptions.xlsx"
+#    url = "https://www.epo.org/searching-for-patents/data/coverage/weekly.html"
+#    response = session.get(url)
+#    response.raise_for_status()
+#    tree = ET.HTML(response.text)
+#    print(tree)
+#    excel_url = tree.xpath('.//a[contains(@href, "legal_code_descriptions")]/@href')
+#    print(excel_url)
+#    excel_url = excel_url[0]
+#    out_path = dir / excel_url.split("/")[-1]
+#    if out_path.exists():
+#        return out_path
+#    response = session.get(excel_url, stream=True)
+#    with out_path.open("wb") as f:
+#        for chunk in response.iter_content(chunk_size=8192):
+#            f.write(chunk)
+#   return out_path
 
 
 def create_code_database(excel_path):
