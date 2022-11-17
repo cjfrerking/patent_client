@@ -13,8 +13,8 @@ class FTDocumentIdSchema(Schema):
 
 class ClaimsSchema(Schema):
     document_id = FTDocumentIdSchema(".//ft:document-id")
-    claims = f.Str(".//ft:claims", formatter=ClaimsParser().parse)
-    claim_text = f.Str(".//ft:claims", formatter=lambda text: text)
+    claims = f.Str(".//ft:claims[@lang='EN']", formatter=ClaimsParser().parse)
+    claim_text = f.Str(".//ft:claims[@lang='EN']", formatter=lambda text: text)
 
 
 class DescriptionField(f.Field):
