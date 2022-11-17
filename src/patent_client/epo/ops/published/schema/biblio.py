@@ -83,6 +83,8 @@ class InpadocBiblioSchema(Schema):
     title = f.Str('.//epo:invention-title[@lang="en"]')
     titles = ListField(TitleSchema, ".//epo:invention-title")
     abstract = f.Str('.//epo:abstract[@lang="en"]')
+    if abstract == '':
+        abstract = f.Str('.//epo:abstract')
     citations = ListField(CitationSchema, ".//epo:citation")
     applicants_epodoc = ListField(f.Str(), './/epo:applicant[@data-format="epodoc"]//epo:name')
     applicants_original = ListField(f.Str(), './/epo:applicant[@data-format="original"]//epo:name')
